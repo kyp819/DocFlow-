@@ -1,0 +1,26 @@
+services:
+  # Supabase/Render PostgreSQL DB Link
+  - type: database
+    name: clinic-db
+    plan: free
+    databaseName: clinic_db
+    user: postgres
+
+  # Spring Boot Web API Service
+  - type: web
+    name: clinic-appointment-api
+    plan: free
+    runtime: docker
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: clinic-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: clinic-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: clinic-db
+          property: password
