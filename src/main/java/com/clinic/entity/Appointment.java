@@ -6,6 +6,44 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * Represents a clinic appointment booking.
+ * 
+ * <p>This entity manages the relationship between a patient and a doctor for a scheduled
+ * appointment. It tracks the appointment date/time, status, and clinical notes.</p>
+ * 
+ * <p>Key responsibilities:
+ * <ul>
+ *   <li>Link patient to doctor</li>
+ *   <li>Store appointment datetime and status</li>
+ *   <li>Track clinical notes for the appointment</li>
+ *   <li>Record creation timestamp for audit purposes</li>
+ * </ul>
+ * </p>
+ * 
+ * <p>Status lifecycle:
+ * <ul>
+ *   <li>{@link AppointmentStatus#BOOKED} - Initial booking</li>
+ *   <li>{@link AppointmentStatus#RESCHEDULED} - Changed to different time</li>
+ *   <li>{@link AppointmentStatus#CANCELLED} - Cancelled by patient or doctor</li>
+ *   <li>{@link AppointmentStatus#COMPLETED} - Appointment occurred</li>
+ * </ul>
+ * </p>
+ * 
+ * <p>Business rules:
+ * <ul>
+ *   <li>Appointment times must fall within doctor's availability schedule</li>
+ *   <li>No overlapping appointments for doctor or patient</li>
+ *   <li>Cannot book appointments in the past</li>
+ *   <li>Each appointment is 30 minutes (default duration)</li>
+ * </ul>
+ * </p>
+ * 
+ * @see Doctor
+ * @see Patient
+ * @see AppointmentStatus
+ * @see DoctorAvailability
+ */
 @Entity
 @Table(name = "appointments")
 @Getter

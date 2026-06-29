@@ -4,6 +4,34 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 
+/**
+ * Represents a doctor profile in the clinic system.
+ * 
+ * <p>This entity extends the basic user account with doctor-specific information such as
+ * specialization, qualifications, and consultation fees. Each doctor has a one-to-one
+ * relationship with a {@link User} account.</p>
+ * 
+ * <p>Key responsibilities:
+ * <ul>
+ *   <li>Store professional credentials (specialization, qualification, experience)</li>
+ *   <li>Maintain availability schedules through {@link DoctorAvailability}</li>
+ *   <li>Track consultation fees</li>
+ *   <li>Provide professional biography</li>
+ * </ul>
+ * </p>
+ * 
+ * <p>Business relationships:
+ * <ul>
+ *   <li>One-to-one with {@link User} (inheritance pattern)</li>
+ *   <li>One-to-many with {@link DoctorAvailability} (schedules)</li>
+ *   <li>One-to-many with {@link Appointment} (booked appointments)</li>
+ * </ul>
+ * </p>
+ * 
+ * @see User
+ * @see DoctorAvailability
+ * @see Appointment
+ */
 @Entity
 @Table(name = "doctors")
 @Getter
